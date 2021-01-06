@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #224941 url("relaxerappimg.jpg") no-repeat center center;
+  min-height: 100vh;
+  font-family: "Montserrat", "sans- serif";
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  position: relative; /* Because both circles are absolute */
+  transform: scale(1);
+}
+
+.circle {
+  background-color: #010f1c;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%; /* To make circle shape */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* To show text 'Breath in' (without z-index -1 it was covering the text)*/
+}
+
+.gradient-circle /* bigger circle (looks like border from circle above)*/ {
+  background: conic-gradient(
+    #55b7a4 0%,
+    #4ca493 40%,
+    #fff 40%,
+    #fff 60%,
+    #336d62 60%,
+    #2a5b52 100%
+      /* Percentages are the different parts of the section of the circle */
+  );
+  height: 320px;
+  width: 320px;
+  z-index: -2; /* To go behind circle from above because -2 < -1 */
+  border-radius: 50%;
+  position: absolute; /* To take up entire space */
+  top: -10px;
+  left: -10px;
+}
+
+.pointer {
+  background-color: #fff;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: block; /*Because its a span and spans are display inline by default */
+}
+
+.pointer-container {
+  position: absolute;
+  top: -40px; /* Puts pointer above gradient circle (works with position absolute) */
+  left: 140px; /* Puts pointer above gradient circle (works with position absolute) */
+  width: 20px; /* Makes pointer only go from 20px wide while rotating */
+  height: 190px; /* Makes pointer only go from middle of big circle while rotating */
+  animation: rotate 7.5s linear forwards infinite;
+  transform-origin: bottom center;
+}
+
+/* Works with animation from pointer-container */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* .grow is called in JS file */
+.container.grow {
+  animation: grow 3s linear forwards;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.2);
+  }
+}
+
+/* .shrink is called in JS file */
+.container.shrink {
+  animation: shrink 3s linear forwards;
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
